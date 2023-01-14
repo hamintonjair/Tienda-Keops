@@ -126,7 +126,6 @@
          foreach ( $productos  as $producto){
 
              $result = array(
-
                       "personaid" =>  $idCliente,
                       "productoid" =>  $producto['idproducto'],
                       "precio" =>  $producto['precio'],

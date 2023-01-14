@@ -104,6 +104,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
+<!-- scrip para el boot -->
+<script src="//code.tidio.co/he656z7p8gra0kt1f8pg3wj5wgxcqed8.js" async></script>
+
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <script src="<?php echo base_url(); ?>assets/Template/Cliente/assets3/js/jquery.min.js"></script>
 <script type="text/javascript">
@@ -174,8 +177,14 @@
 <?php 
 
 $data = current_url();
+$inicio = "http://localhost/Tienda-online/index.php";
 $carrito = "http://localhost/Tienda-online/index.php/carrito";
 $pago =    "http://localhost/Tienda-online/index.php/carrito/procesarpago";
+$servicios = "http://localhost/Tienda-online/index.php/servicios";
+$tienda =    "http://localhost/Tienda-online/index.php/tienda";
+$nosotros = "http://localhost/Tienda-online/index.php/nosotros";
+$sucursales =    "http://localhost/Tienda-online/index.php/sucursales";
+$contacto =    "http://localhost/Tienda-online/index.php/contacto";
 
 ?>
 
@@ -225,19 +234,20 @@ $pago =    "http://localhost/Tienda-online/index.php/carrito/procesarpago";
 					</a>
 				
 					<!-- Menu desktop -->
-					
+			
 					<div class="menu-desktop">
 						<ul class="main-menu">
+						
 							<li class="active-menu">
 								<a href="<?php echo base_url(); ?>">Inicio</a>								
 							</li>
-
-							<li>
+                    
+							<li >
 							
 								<a href="<?php echo base_url(); ?>tienda">Tienda</a>
 							
 							</li>	
-							<li>
+							<li >
 							
 								<a href="<?php echo base_url(); ?>servicios">Servicios & más</a>
 							
