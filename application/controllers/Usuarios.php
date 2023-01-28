@@ -11,7 +11,7 @@ class Usuarios extends CI_Controller {
 
         if(empty($_SESSION['login']))
         {
-           echo '<script>window.location.href="http://localhost/sitio-keops//login"</script>';				
+           echo '<script>window.location.href="http://localhost/sitio-keops/login"</script>';				
         }
         $this->load->model("RolesModel");	
         $this->load->model("UsuariosModel");
@@ -27,7 +27,7 @@ class Usuarios extends CI_Controller {
             'persona'=>$this->UsuariosModel->getRoles()
         );
         if (empty($_SESSION['permisosMod']->r)){
-            echo '<script>window.location.href="http://localhost/sitio-keops//dashboard"</script>';	
+            echo '<script>window.location.href="http://localhost/sitio-keops/dashboard"</script>';	
         }    
  
         $this->load->view('layouts/Administrador/header_admin');
