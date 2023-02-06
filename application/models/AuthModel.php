@@ -16,7 +16,7 @@
           $this->db->where('email_user', $email);
         
           $resultado = $this->db->get();
-              
+        
           if($resultado->num_rows() > 0)
           {
               return $resultado->row();

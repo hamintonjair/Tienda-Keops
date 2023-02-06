@@ -37,6 +37,7 @@ class Login extends CI_Controller {
 
               $respuesta = $this->AuthModel->ValidarLogin( $email_user, $password);            
               
+            
               if(empty($respuesta))
               {
                  $resultados = (array('status'=>false,'msg' =>'El usuario o la Contraseña es incorrecto'));	
