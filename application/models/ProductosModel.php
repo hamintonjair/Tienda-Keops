@@ -19,6 +19,16 @@
        return $this->db->get()->result();  
       
     } 
+     //listar los productos
+     public function listarP($idProducto)
+     {		            
+        $this->db->select("stock");
+        $this->db->from("producto");         
+        $this->db->where("status != 0"); 
+        $this->db->where("idproducto", $idProducto);   
+        return $this->db->get()->result();  
+       
+     } 
     //validar si ya existe un producto con el nombre enviado
     public function ValidarProductos($nombre){
       $this->db->select('nombre');

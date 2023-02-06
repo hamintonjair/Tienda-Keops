@@ -91,8 +91,13 @@ $('.js-addcart-detail').each(function(){
 
 					MostrarSuccess(nameProduct, "¡Se agrego al corrito!", "success");
 				} else {
-					
+					//aqui se modifico
+					const cants = document.querySelectorAll(".cantCarrito");
+					cants.forEach(element => {
+						element.setAttribute("data-notify",data.cantCarrito)
+					}); 
 					MostrarAlertaAlert("Error", data.msg, "error");
+					
 
 				}
 				return false;

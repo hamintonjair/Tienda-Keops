@@ -142,90 +142,194 @@ class Tienda extends CI_Controller {
 			$this->load->view('layouts/Principal/footer');
 		}
 	}	
-	//añadir al carrito
+	// //añadir al carrito
+	// public function addCarrito(){
+
+	//    if ($this->input->is_ajax_request()) {		
+			
+	// 	        // unset($_SESSION['arrCarrito']);exit;
+	// 			$arrCarrito = array();
+	// 			$cantCarrito = 0;
+	// 			$idproducto = openssl_decrypt($this->input->post('id'), METHODENCRIPT, KEY);
+	// 			$cantidad = $this->input->post('cant');
+	
+	// 			 if(is_numeric($idproducto) && is_numeric($cantidad)){
+	             
+	// 				$arrInfoProducto = $this->TproductosModel->getProductoIDT($idproducto);
+				
+	// 				for($i =0;$i < count($arrInfoProducto); $i++){
+
+	// 					$nombre =  $arrInfoProducto[$i]->nombre;
+	// 					$precio =  $arrInfoProducto[$i]->precio;
+	// 					$USD =  $arrInfoProducto[$i]->USD;
+	// 					//obtener la imagen
+	// 					if(count($arrInfoProducto[$i]->images) > 0 ){
+	// 						$images = $arrInfoProducto[$i]->images[0]->url_image;
+	// 					}					
+	// 				}						
+	// 				if(!empty($arrInfoProducto)){
+
+	// 					$arrProducto = ['idproducto' => $idproducto,
+	// 										 'producto' => $nombre,
+	// 										 'cantidad' => $cantidad,
+	// 										 'precio' => $precio,
+	// 										 'imagen' => $images,
+	// 										 'USD'    => $USD
+	// 				  ];					
+	// 		         // di ya existe la variable de session no agrega el mismo producto solo la cantidad
+	// 					if(isset($_SESSION['arrCarrito'])){
+						
+	// 						$on = true;
+	// 						$arrCarrito = $_SESSION['arrCarrito'];
+	// 					   //condicional para añadir la cantidad al producto si le damos añadir varias veces
+	// 						for ($pr=0; $pr <count($arrCarrito); $pr++) {   
+								
+	// 							if($arrCarrito[$pr]['idproducto'] == $idproducto){
+	// 								$arrCarrito[$pr]['cantidad'] += $cantidad;
+	// 								$on = false;								
+	// 				    	    }
+	// 					    }	
+	// 						//si es verdadero es para agregar al carrito					
+	// 						if($on){
+	// 							array_push($arrCarrito,$arrProducto);
+	// 						}
+	// 						$_SESSION['arrCarrito'] = $arrCarrito;
+							
+	// 					}else{
+	// 							array_push($arrCarrito, $arrProducto);
+	// 							$_SESSION['arrCarrito'] = $arrCarrito;							
+	// 					}
+		
+	// 					foreach ($_SESSION['arrCarrito'] as $pro) {
+								
+	// 						$cantCarrito += $pro['cantidad'];
+	// 					}					
+	// 					$htmlCarrito ="";
+	// 					$htmlCarrito =  $this->Helpers->getFile('layouts/Principal/Carrito/modalCarrito',$_SESSION['arrCarrito']);
+	// 					$arrResponse = array("status" => true, 
+	// 										"msg" => '¡Se agrego al corrito!',
+	// 										"cantCarrito" => $cantCarrito,
+	// 										"htmlCarrito" => $htmlCarrito
+	// 									);
+
+	// 			 }else{
+	// 			 	$arrResponse = array("status" => false, "msg" => 'Producto no existente.');
+	// 			}
+			
+	// 		}else{
+			
+	// 			$arrResponse = array("status" => false, "msg" => 'Dato incorrecto.');
+	// 		}	
+	// 		echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);	
+    //     }else{
+	// 	redirect('error');		
+	//     }      
+    //     die();
+    // }
+		//añadir al carrito
 	public function addCarrito(){
 
-	   if ($this->input->is_ajax_request()) {		
-			
-		        // unset($_SESSION['arrCarrito']);exit;
-				$arrCarrito = array();
-				$cantCarrito = 0;
-				$idproducto = openssl_decrypt($this->input->post('id'), METHODENCRIPT, KEY);
-				$cantidad = $this->input->post('cant');
-	
-				 if(is_numeric($idproducto) && is_numeric($cantidad)){
-	             
-					$arrInfoProducto = $this->TproductosModel->getProductoIDT($idproducto);
-				
-					for($i =0;$i < count($arrInfoProducto); $i++){
-
-						$nombre =  $arrInfoProducto[$i]->nombre;
-						$precio =  $arrInfoProducto[$i]->precio;
-						$USD =  $arrInfoProducto[$i]->USD;
-						//obtener la imagen
-						if(count($arrInfoProducto[$i]->images) > 0 ){
-							$images = $arrInfoProducto[$i]->images[0]->url_image;
-						}					
-					}						
-					if(!empty($arrInfoProducto)){
-
-						$arrProducto = ['idproducto' => $idproducto,
-											 'producto' => $nombre,
-											 'cantidad' => $cantidad,
-											 'precio' => $precio,
-											 'imagen' => $images,
-											 'USD'    => $USD
-					  ];					
-			         // di ya existe la variable de session no agrega el mismo producto solo la cantidad
-						if(isset($_SESSION['arrCarrito'])){
-						
-							$on = true;
-							$arrCarrito = $_SESSION['arrCarrito'];
-						   //condicional para añadir la cantidad al producto si le damos añadir varias veces
-							for ($pr=0; $pr <count($arrCarrito); $pr++) {   
-								
-								if($arrCarrito[$pr]['idproducto'] == $idproducto){
-									$arrCarrito[$pr]['cantidad'] += $cantidad;
-									$on = false;								
-					    	    }
-						    }	
-							//si es verdadero es para agregar al carrito					
-							if($on){
-								array_push($arrCarrito,$arrProducto);
-							}
-							$_SESSION['arrCarrito'] = $arrCarrito;
-							
-						}else{
-								array_push($arrCarrito, $arrProducto);
-								$_SESSION['arrCarrito'] = $arrCarrito;							
-						}
-		
-						foreach ($_SESSION['arrCarrito'] as $pro) {
-								
-							$cantCarrito += $pro['cantidad'];
-						}					
-						$htmlCarrito ="";
-						$htmlCarrito =  $this->Helpers->getFile('layouts/Principal/Carrito/modalCarrito',$_SESSION['arrCarrito']);
-						$arrResponse = array("status" => true, 
-											"msg" => '¡Se agrego al corrito!',
-											"cantCarrito" => $cantCarrito,
-											"htmlCarrito" => $htmlCarrito
-										);
-
+			if ($this->input->is_ajax_request()) {		
+				 
+					 // unset($_SESSION['arrCarrito']);exit;
+					 $arrCarrito = array();
+					 $cantCarrito = 0;
+					 $cant =  0 ;
+					 $idproducto = openssl_decrypt($this->input->post('id'), METHODENCRIPT, KEY);
+					 $cantidad = $this->input->post('cant');			
+					 $cantidadP = $this->ProductosModel->listarP($idproducto); 
+	 
+					 if(!empty($_SESSION['arrCarrito'])){	
+						$arrCarr = $_SESSION['arrCarrito'];						
+							for ($pr=0; $pr <count($arrCarr); $pr++) {  													
+								$cant =	$arrCarr[$pr]['cantidad'];		
+							}	    
+					 };
+					
+				 //aqui se modifico
+				 if($cant == $cantidadP[0]->stock  || $cant > $cantidadP[0]->stock || $cantidadP[0]->stock < $cantidad ){			
+									 
+					 $arrResponse = array("status" => false, 
+												 "msg" => 'Stock insuficiente.',
+												 "cantCarrito" => $cant ,											
+											 );
+				 
 				 }else{
-				 	$arrResponse = array("status" => false, "msg" => 'Producto no existente.');
-				}
-			
-			}else{
-			
-				$arrResponse = array("status" => false, "msg" => 'Dato incorrecto.');
-			}	
-			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);	
-        }else{
-		redirect('error');		
-	    }      
-        die();
-    }
+	 
+					 if(is_numeric($idproducto) && is_numeric($cantidad)){
+					  
+						 $arrInfoProducto = $this->TproductosModel->getProductoIDT($idproducto);
+					 
+						 for($i =0;$i < count($arrInfoProducto); $i++){
+	 
+							 $nombre =  $arrInfoProducto[$i]->nombre;
+							 $precio =  $arrInfoProducto[$i]->precio;
+							 $USD =  $arrInfoProducto[$i]->USD;
+							 //obtener la imagen
+							 if(count($arrInfoProducto[$i]->images) > 0 ){
+								 $images = $arrInfoProducto[$i]->images[0]->url_image;
+							 }					
+						 }						
+						 if(!empty($arrInfoProducto)){
+	 
+							 $arrProducto = ['idproducto' => $idproducto,
+												 'producto' => $nombre,
+												 'cantidad' => $cantidad,
+												 'precio' => $precio,
+												 'imagen' => $images,
+												 'USD'    => $USD
+						 ];					
+						 // di ya existe la variable de session no agrega el mismo producto solo la cantidad
+							 if(isset($_SESSION['arrCarrito'])){
+							 
+								 $on = true;
+								 $arrCarrito = $_SESSION['arrCarrito'];
+							 //condicional para añadir la cantidad al producto si le damos añadir varias veces
+								 for ($pr=0; $pr <count($arrCarrito); $pr++) {   
+									 
+									 if($arrCarrito[$pr]['idproducto'] == $idproducto){
+										 $arrCarrito[$pr]['cantidad'] += $cantidad;
+										 $on = false;								
+									 }
+								 }	
+								 //si es verdadero es para agregar al carrito					
+								 if($on){
+									 array_push($arrCarrito,$arrProducto);
+								 }
+								 $_SESSION['arrCarrito'] = $arrCarrito;
+								 
+							 }else{
+									 array_push($arrCarrito, $arrProducto);
+									 $_SESSION['arrCarrito'] = $arrCarrito;							
+							 }
+			 
+							 foreach ($_SESSION['arrCarrito'] as $pro) {
+									 
+								 $cantCarrito += $pro['cantidad'];
+							 }	
+							 $cant =	$cantCarrito;		
+							 $htmlCarrito ="";
+							 $htmlCarrito =  $this->Helpers->getFile('layouts/Principal/Carrito/modalCarrito',$_SESSION['arrCarrito']);
+							 $arrResponse = array("status" => true, 
+												 "msg" => '¡Se agrego al corrito!',
+												 "cantCarrito" => $cantCarrito,
+												 "htmlCarrito" => $htmlCarrito
+											 );
+	 
+					 }else{
+						 $arrResponse = array("status" => false, "msg" => 'Producto no existente.');
+					 }
+				 }else{
+					 $arrResponse = array("status" => false, "msg" => 'Dato incorrecto.');
+					 }
+	 
+				 }	
+				 echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);	
+			 }else{
+			 redirect('error');		
+			 }      
+			 die();
+	}
 	//eliminar producto del carrito
 	public function delCarrito(){
 		
@@ -280,57 +384,117 @@ class Tienda extends CI_Controller {
 		}
 		die();
 	}
-	//actualizar carrito
+	// //actualizar carrito
+	// public function updCarrito(){
+
+	// 	$empresa = $this->ConfiguracionModel->getEmpresa();
+	// 	$costo_evio =  $empresa[0]->costo_evio;	
+	// 	if($this->input->is_ajax_request()){
+
+	// 		$arrCarrito = array();
+	// 		$totalProducto = 0;
+	// 		$subtotal = 0;
+	// 		$total = 0;
+	// 		$totalProducto2 = 0;
+	// 		$subtotal2 = 0;
+	// 		$total2 = 0;
+
+	// 		$idproducto = openssl_decrypt($this->input->post('id'), METHODENCRIPT, KEY);
+	// 		$cantidad = intval($this->input->post('cantidad'));
+
+	// 		if(is_numeric($idproducto) &&  $cantidad > 0){
+
+	// 			$arrCarrito = $_SESSION['arrCarrito'];				
+	// 			for ($p=0; $p < count($arrCarrito); $p++) { 
+	// 				if($arrCarrito[$p]['idproducto'] == $idproducto){
+	// 					$arrCarrito[$p]['cantidad'] = $cantidad;
+	// 					$totalProducto = $arrCarrito[$p]['precio'] * $cantidad;
+	// 					$totalProducto2 = $arrCarrito[$p]['USD'] * $cantidad;
+	// 					break;
+	// 				}
+	// 			}
+	// 			$_SESSION['arrCarrito'] = $arrCarrito;
+	// 			foreach ($_SESSION['arrCarrito'] as $pro) {
+	// 				$subtotal += $pro['cantidad'] * $pro['precio']; 
+	// 				$subtotal2 += $pro['cantidad'] * $pro['USD']; 
+	// 			}
+	// 			$arrResponse = array("status" => true, 
+	// 								"post" => '¡Producto actualizado!',
+	// 								"totalProducto" => SMONEY.formatMoney($totalProducto),
+	// 								"totalProducto2" => CURRENCY.formatMoney($totalProducto2),
+	// 								"subTotal" => SMONEY.formatMoney($subtotal),
+	// 								"subTotal2" => CURRENCY.formatMoney($subtotal2),						
+	// 								"total" => CURRENCY.formatMoney($subtotal2 + $costo_evio )						
+	// 							);
+
+	// 		}else{
+	// 			$arrResponse = array("status" => false, "msg" => 'Dato incorrecto.');
+	// 		}
+	// 		 echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+	// 	}else{
+	// 		redirect('error');	
+	// 	}
+	// 	die();
+	// }
+		//actualizar carrito
 	public function updCarrito(){
 
-		$empresa = $this->ConfiguracionModel->getEmpresa();
-		$costo_evio =  $empresa[0]->costo_evio;	
-		if($this->input->is_ajax_request()){
-
-			$arrCarrito = array();
-			$totalProducto = 0;
-			$subtotal = 0;
-			$total = 0;
-			$totalProducto2 = 0;
-			$subtotal2 = 0;
-			$total2 = 0;
-
-			$idproducto = openssl_decrypt($this->input->post('id'), METHODENCRIPT, KEY);
-			$cantidad = intval($this->input->post('cantidad'));
-
-			if(is_numeric($idproducto) &&  $cantidad > 0){
-
-				$arrCarrito = $_SESSION['arrCarrito'];				
-				for ($p=0; $p < count($arrCarrito); $p++) { 
-					if($arrCarrito[$p]['idproducto'] == $idproducto){
-						$arrCarrito[$p]['cantidad'] = $cantidad;
-						$totalProducto = $arrCarrito[$p]['precio'] * $cantidad;
-						$totalProducto2 = $arrCarrito[$p]['USD'] * $cantidad;
-						break;
+			$empresa = $this->ConfiguracionModel->getEmpresa();
+			$costo_evio =  $empresa[0]->costo_evio;	
+			if($this->input->is_ajax_request()){
+	
+				$arrCarrito = array();
+				$totalProducto = 0;
+				$subtotal = 0;
+				$total = 0;
+				$totalProducto2 = 0;
+				$subtotal2 = 0;
+				$total2 = 0;
+	
+				//aqui se modifico
+				$idproducto = openssl_decrypt($this->input->post('id'), METHODENCRIPT, KEY);
+				$cantidad = intval($this->input->post('cantidad'));
+				$cantidadP = $this->ProductosModel->listarP($idproducto); 			
+	
+					if($cantidad <= $cantidadP[0]->stock ){
+	
+						if(is_numeric($idproducto) &&  $cantidad > 0){
+	
+						$arrCarrito = $_SESSION['arrCarrito'];				
+						for ($p=0; $p < count($arrCarrito); $p++) { 
+							if($arrCarrito[$p]['idproducto'] == $idproducto){
+								$arrCarrito[$p]['cantidad'] = $cantidad;
+								$totalProducto = $arrCarrito[$p]['precio'] * $cantidad;
+								$totalProducto2 = $arrCarrito[$p]['USD'] * $cantidad;
+								break;
+							}
+						}
+						$_SESSION['arrCarrito'] = $arrCarrito;
+						foreach ($_SESSION['arrCarrito'] as $pro) {
+							$subtotal += $pro['cantidad'] * $pro['precio']; 
+							$subtotal2 += $pro['cantidad'] * $pro['USD']; 
+						}
+						$arrResponse = array("status" => true, 
+											"post" => '¡Producto actualizado!',
+											"totalProducto" => SMONEY.formatMoney($totalProducto),
+											"totalProducto2" => CURRENCY.formatMoney($totalProducto2),
+											"subTotal" => SMONEY.formatMoney($subtotal),
+											"subTotal2" => CURRENCY.formatMoney($subtotal2),						
+											"total" => CURRENCY.formatMoney($subtotal2 + $costo_evio )						
+										);
+	
+					}else{
+						$arrResponse = array("status" => false, "msg" => 'Dato incorrecto.');
 					}
-				}
-				$_SESSION['arrCarrito'] = $arrCarrito;
-				foreach ($_SESSION['arrCarrito'] as $pro) {
-					$subtotal += $pro['cantidad'] * $pro['precio']; 
-					$subtotal2 += $pro['cantidad'] * $pro['USD']; 
-				}
-				$arrResponse = array("status" => true, 
-									"post" => '¡Producto actualizado!',
-									"totalProducto" => SMONEY.formatMoney($totalProducto),
-									"totalProducto2" => CURRENCY.formatMoney($totalProducto2),
-									"subTotal" => SMONEY.formatMoney($subtotal),
-									"subTotal2" => CURRENCY.formatMoney($subtotal2),						
-									"total" => CURRENCY.formatMoney($subtotal2 + $costo_evio )						
-								);
-
+				}else{
+					$arrResponse = array("status" => false, "msg" => 'Stock insuficiente.');
+				}		
+				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+	
 			}else{
-				$arrResponse = array("status" => false, "msg" => 'Dato incorrecto.');
+				redirect('error');	
 			}
-			 echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
-		}else{
-			redirect('error');	
-		}
-		die();
+			die();
 	}
 	//procesar pago
 	public function ProcesarPago(){
