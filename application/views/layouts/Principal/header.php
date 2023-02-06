@@ -106,7 +106,7 @@
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
 
 <!-- scrip para el boot -->
-<script src="//code.tidio.co/he656z7p8gra0kt1f8pg3wj5wgxcqed8.js" async></script>
+<script src="//code.tidio.co/vw9yuo4tna30onzfevbexk98wfe8npjs.js" async></script>
 
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <script src="<?php echo base_url(); ?>assets/Template/Cliente/assets3/js/jquery.min.js"></script>
