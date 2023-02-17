@@ -65,7 +65,8 @@
 				<?php if($pagina['pagina'] > 1){ ?>
 					<a href="<?= base_url() ?>tienda/categoria/<?= $idcategoria.'/'.$ruta.'/'.$prevPagina?>" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04"> <i class="fa fa-chevron-left" aria-hidden="true"></i> &nbsp; Anterior </a>&nbsp;&nbsp;
 				<?php } ?>
-				<?php ; if($pagina['pagina'] != $pagina['total_paginas']){ ?>			
+				<!-- se modificó de != -->
+				<?php ; if($pagina['pagina'] == $pagina['total_paginas']){ ?>			
 					<a href="<?= base_url() ?>tienda/categoria/<?= $idcategoria.'/'.$ruta.'/'.$nextPagina ?>" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04"> Siguiente &nbsp; <i class="fa fa-chevron-right" aria-hidden="true"></i> </a>
 				<?php } ?>
 		   </div>

@@ -6,7 +6,7 @@
           
 				<h1 class="ltext-103 cl5">
                 <?php  ; ?>            	 
-			       <h3>Categorías x Servicios</h3>		 
+			       <h3>Categorías & Servicios</h3>		 
 		        <?php 	; ?>	
 				</h1>
 		
@@ -21,7 +21,7 @@
 					<div class="block1 wrap-pic-w">
 						<img src="<?= $banner[$j]->portada ?>" height="250" alt="<?= $banner[$j]->nombre ?>">
 
-						<a href="<?= 'tienda/Categoria/'.$banner[$j]->idcategoria.'/'.$ruta; ?>" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+						<a href="<?= 'tienda/categoria/'.$banner[$j]->idcategoria.'/'.$ruta; ?>" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 							<div class="block1-txt-child1 flex-col-l">
 								<span  class="block1-name ltext-102 trans-04 p-b-8">
 									<?= $banner[$j]->nombre?>

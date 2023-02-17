@@ -88,6 +88,7 @@ class Tienda extends CI_Controller {
 			echo '<script>window.location.href="http://localhost/sitio-keops/"</script>';	
 		}else{	
 			// $pagina =  1;	
+			
 			$pagina = is_numeric($pagina) ? $pagina : 1;	
 		
 			$cantProductos = $this->TproductosModel->cantProductos($id);
@@ -103,7 +104,7 @@ class Tienda extends CI_Controller {
 			$idcategoria = $this->Helpers->strClean($id);
 			$Nruta = $this->Helpers->strClean($ruta);		
 			$Nproductos = $this->TproductosModel->getProductosCategoriasP($idcategoria,$Nruta,$desde ,PROCATEGORIA);
-
+		
 			$categoria = $this->TcategoriaModel->getCategorias();
 			$productos = $Nproductos['productos'];			
 		
@@ -238,20 +239,26 @@ class Tienda extends CI_Controller {
 					 $idproducto = openssl_decrypt($this->input->post('id'), METHODENCRIPT, KEY);
 					 $cantidad = $this->input->post('cant');			
 					 $cantidadP = $this->ProductosModel->listarP($idproducto); 
-	 
+	                 $cantTemporal = 0;
 					 if(!empty($_SESSION['arrCarrito'])){	
 						$arrCarr = $_SESSION['arrCarrito'];						
 							for ($pr=0; $pr <count($arrCarr); $pr++) {  													
-								$cant =	$arrCarr[$pr]['cantidad'];		
+								
+								$id_Producto = $arrCarr[$pr]['idproducto'];
+
+								if($id_Producto == $idproducto){
+									$cant = $arrCarr[$pr]['cantidad'];		
+								}
+								$cantTemporal += $arrCarr[$pr]['cantidad'];		
 							}	    
 					 };
-					
+					 $Cantidad = $cantidadP + $cant;					  
 				 //aqui se modifico
-				 if($cant == $cantidadP[0]->stock  || $cant > $cantidadP[0]->stock || $cantidadP[0]->stock < $cantidad ){			
+				 if( $cant >= $cantidadP[0]->stock || $cantidadP[0]->stock < $Cantidad ){			
 									 
 					 $arrResponse = array("status" => false, 
 												 "msg" => 'Stock insuficiente.',
-												 "cantCarrito" => $cant ,											
+												 "cantCarrito" => $cantTemporal ,											
 											 );
 				 
 				 }else{
