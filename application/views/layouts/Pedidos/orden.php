@@ -121,11 +121,13 @@
                               if( $orden->tipopagoid == 1){
                                 $subtotalF =  CURRENCY.' '.formatMoney($subtotal += $detall->cantidad * $detall->USD);
                                 $precio =  CURRENCY.' '. formatMoney($detall->cantidad * $detall->USD);
+                                $precio2 =  CURRENCY.' '. formatMoney($detall->USD);
                                 $monto = CURRENCY.' '. formatMoney($orden->USD);
                                 $costo_envio = CURRENCY.' '. formatMoney($orden->costo_envio);
                               }else{
                                 $subtotalF =  SMONEY.' '.formatMoney($subtotal += $detall->cantidad * $detall->precio);
                                 $precio =  SMONEY.' '. formatMoney($detall->cantidad * $detall->precio);
+                                $precio2 =  SMONEY.' '. formatMoney($detall->precio);
                                 $monto = SMONEY.' '. formatMoney($orden->monto);
                                 $costo_envio = SMONEY.' '. formatMoney($orden->costo_envioP);
                               }    
@@ -134,7 +136,7 @@
                      ?>
                   <tr>
                     <td><?= $detall->producto ?></td>
-                    <td class="text-right"><?=$precio ?></td>
+                    <td class="text-right"><?=$precio2 ?></td>
                     <td class="text-center"><?= $detall->cantidad ?></td>
                     <td class="text-right"><?= $precio ?></td>
                   </tr>
