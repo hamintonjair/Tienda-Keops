@@ -798,7 +798,7 @@ class Tienda extends CI_Controller {
 		$desde = ($pagina-1) * PROPORPAGINA;
 		$total_paginas = ceil($total_registro / PROPORPAGINA);				
 		$productos = $this->TproductosModel->getProductoPage($desde,PROPORPAGINA);
-
+		$categoria = $this->TcategoriaModel->getCategorias();
 		$pagina = array(
 			     'pagina'=>$pagina,
 			     'total_paginas'=>$total_paginas,
@@ -806,7 +806,7 @@ class Tienda extends CI_Controller {
 	
 		$this->load->view('layouts/Principal/header');
 		$this->load->view('layouts/Principal/Carrito/modalCarrito');	
-		$this->load->view('layouts/Principal/tienda', compact('productos','pagina'));
+		$this->load->view('layouts/Principal/tienda', compact('productos','pagina','categoria'));
 		$this->load->view('layouts/Principal/footer');
 	}
     //buscador 
