@@ -724,7 +724,7 @@ class Tienda extends CI_Controller
 							);
 							if (!empty($request_pedido)) {
 
-								$idPedido = $request_pedido->idpedido;
+								$idPedido = $request_pedido;
 								//Insertamos detalle
 								foreach ($_SESSION['arrCarrito'] as $producto) {
 									$productoid = $producto['idproducto'];
