@@ -33,39 +33,63 @@
       }  
    }
    //insertar pedido
-   public function insertPedido($idtransaccionpaypal, $datospaypal, $personaid, $costo_evioU, $costo_envioP,  $monto, $tipopagoid,  $direccionenvio, $status,	$montoUSD ){
-      $datos = array(
-         "idtransaccionpaypal" =>  $idtransaccionpaypal,
-         "datospaypal"         =>  $datospaypal,
-         "personaid"           =>  $personaid,
-         "costo_envio"         =>  $costo_evioU,
-         "costo_envioP"        =>  $costo_envioP,
-         "monto"               =>  $monto,
-         "tipopagoid"          =>  $tipopagoid,
-         "direccion_envio"     =>  $direccionenvio,
-         "status"              =>  $status,
-         "USD"                 =>  $montoUSD ,
-       );
+   // public function insertPedido($idtransaccionpaypal, $datospaypal, $personaid, $costo_evioU, $costo_envioP,  $monto, $tipopagoid,  $direccionenvio, $status,	$montoUSD ){
+   //    $datos = array(
+   //       "idtransaccionpaypal" =>  $idtransaccionpaypal,
+   //       "datospaypal"         =>  $datospaypal,
+   //       "personaid"           =>  $personaid,
+   //       "costo_envio"         =>  $costo_evioU,
+   //       "costo_envioP"        =>  $costo_envioP,
+   //       "monto"               =>  $monto,
+   //       "tipopagoid"          =>  $tipopagoid,
+   //       "direccion_envio"     =>  $direccionenvio,
+   //       "status"              =>  $status,
+   //       "USD"                 =>  $montoUSD ,
+   //     );
 
-      $result = $this->db->insert('pedido',$datos);  
+   //    $result = $this->db->insert('pedido',$datos);  
 
-      if($result == true){
+   //    if($result == true){
    
-         $this->db->select('idpedido');
-         $this->db->from('pedido'); 
-         $this->db->where('idtransaccionpaypal', $idtransaccionpaypal );         
+   //       $this->db->select('idpedido');
+   //       $this->db->from('pedido'); 
+   //       $this->db->where('idtransaccionpaypal', $idtransaccionpaypal );         
    
-           $resultado = $this->db->get();
+   //         $resultado = $this->db->get();
              
-            if($resultado->num_rows() > 0)
-            {        
-               return $resultado->row();
-            }else{
+   //          if($resultado->num_rows() > 0)
+   //          {        
+   //             return $resultado->row();
+   //          }else{
              
-               return false;
-            }
-      }
-   }
+   //             return false;
+   //          }
+   //    }
+   // }
+	public function insertPedido($idtransaccionpaypal, $datospaypal, $personaid, $costo_evioU, $costo_envioP, $monto, $tipopagoid, $direccionenvio, $status, $montoUSD) {
+		$datos = array(
+			 "idtransaccionpaypal" => $idtransaccionpaypal,
+			 "datospaypal"         => $datospaypal,
+			 "personaid"           => $personaid,
+			 "costo_envio"         => $costo_evioU,
+			 "costo_envioP"        => $costo_envioP,
+			 "monto"               => $monto,
+			 "tipopagoid"          => $tipopagoid,
+			 "direccion_envio"     => $direccionenvio,
+			 "status"              => $status,
+			 "USD"                 => $montoUSD
+		);
+  
+		$result = $this->db->insert('pedido', $datos);  
+  
+		if($result) {
+			 // Devuelve el id del pedido recién insertado
+			 return $this->db->insert_id();
+		} else {
+			 return false;
+		}
+  }
+  
    //insertar detalle pedido
    public function insertDetalle($idpedido, $productoid, $precio, $USD, $cantidad){
      

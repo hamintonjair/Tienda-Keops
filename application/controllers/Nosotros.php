@@ -40,7 +40,7 @@ class Nosotros extends CI_Controller {
 
         if(empty($nosotros)){
 
-            echo '<script>window.location.href="http://localhost/Tienda-online"</script>';				
+            echo '<script>window.location.href="http://localhost/sitio-keops"</script>';				
 
         }else{
             // $nosotros['nosotros'] =  $pageContent ;

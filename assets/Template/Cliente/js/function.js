@@ -354,50 +354,49 @@ function fntViewPago(){
 }
 
 //comprar contra entrega
-if(document.querySelector("#btnComprar")){
-	let btnPago = document.querySelector("#btnComprar");
-	let base_url = 'http://localhost/sitio-keops/';
-	btnPago.addEventListener('click',function() { 
+if (document.querySelector("#btnComprar")) {
+    let btnPago = document.querySelector("#btnComprar");
+    let base_url = 'http://localhost/sitio-keops/';
+    btnPago.addEventListener('click', async function () { 
 
-		let dir = document.querySelector("#txtDireccion").value;
-	    let ciudad = document.querySelector("#txtCiudad").value;
-	    let inttipopago = document.querySelector("#listtipopago").value; 
+        let dir = document.querySelector("#txtDireccion").value;
+        let ciudad = document.querySelector("#txtCiudad").value;
+        let inttipopago = document.querySelector("#listtipopago").value; 
 
-	    if( txtDireccion == "" || txtCiudad == "" || inttipopago =="" ){
+        if (dir == "" || ciudad == "" || inttipopago == "") {
+            MostrarAlertaAlert("", "Complete datos de envío", "error");
+            return;
+        } else {
+            let formData = new FormData();
+            formData.append('direccion', dir);    
+            formData.append('ciudad', ciudad);
+            formData.append('inttipopago', inttipopago);
+            divLoading.style.display = "flex";
 
-			MostrarAlertaAlert("", "Complete datos de envío" , "error");
-			return;
-		}else{
-			
-			let formData = new FormData();
-		    formData.append('direccion',dir);    
-		   	formData.append('ciudad',ciudad);
-			formData.append('inttipopago',inttipopago);
-            divLoading.style.display = "flex",
-			$.ajax({
-				
-				type: 'POST',
-				url: base_url + 'Tienda/procesarVenta',
-				dataType: "json",
-				data: formData,
-				contentType: false,
-				processData: false,
-				async: false,
-				success: function(data) {
-	
-					if(data.status){						
-						window.location = base_url+ "Tienda/confirmarpedido/";
-					}else{
-						MostrarAlertaAlert("", data.msg , "error");
-						divLoading.style.display = "none";
-					}
-				}
-			});				  
-            return false;		
-		}
+            try {
+                let response = await fetch(base_url + 'Tienda/procesarVenta', {
+                    method: 'POST',
+                    body: formData
+                });
 
-	},false);
+                let data = await response.json();
+
+                if (data.status) {                        
+                    window.location = base_url + "Tienda/confirmarpedido/";
+                } else {
+                    MostrarAlertaAlert("", data.msg, "error");
+                }
+            } catch (error) {
+                console.error("Error en la solicitud:", error);
+            } finally {
+                divLoading.style.display = "none";
+            }
+
+            return false;       
+        }
+    }, false);
 }
+
 //suscripcion
 if(document.querySelector("#frmSuscripcion")){
 	let frmSuscripcion = document.querySelector("#frmSuscripcion");
